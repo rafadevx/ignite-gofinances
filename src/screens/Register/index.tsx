@@ -45,7 +45,7 @@ export function Register() {
 
   const { control, handleSubmit, reset, formState: { errors } } = useForm({ resolver: yupResolver(schema)});
 
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   const { user } = useAuth();
 
@@ -89,7 +89,7 @@ export function Register() {
         name: 'categoria',
       });
       
-      navigation.navigate('Listagem');
+      // navigation.navigate('Listagem');
     } catch (error) {
       console.log(error);
       Alert.alert('Não foi possível salvar');
@@ -134,14 +134,22 @@ export function Register() {
                 isActive={trasactionType === 'negative'}
               />
             </TransactionTypes>
-            <CategorySelectButton title={category.name} onPress={handleOpenSelectCategory} />
+            <CategorySelectButton
+              testID="button-category" 
+              title={category.name} 
+              onPress={handleOpenSelectCategory} 
+            />
           </Fields>
 
           <Button title="Enviar" onPress={handleSubmit(handleRegister)} />
         </Form>
 
-        <Modal visible={categoryModalOpen}>
-          <CategorySelect category={category} setCategory={setCategory} closeSelectCategory={handleCloseSelectCategory} />
+        <Modal testID="modal-category" visible={categoryModalOpen}>
+          <CategorySelect 
+            category={category} 
+            setCategory={setCategory} 
+            closeSelectCategory={handleCloseSelectCategory} 
+          />
         </Modal>
       </Container>
     </TouchableWithoutFeedback>
